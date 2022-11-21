@@ -35,3 +35,12 @@ def data2json(website,country,daily,cumulative,norm_daily,norm_comulative):
     write_json(data)
 
 #data2json('nytimes','France',3,24,34.5,234)
+
+def readJson():
+    with open('CovidData.json') as json_file:
+        data = json.load(json_file)
+        return data
+
+def getData(data,website,country,date,datatype):
+    number = data[country][date][website][datatype]
+    return number

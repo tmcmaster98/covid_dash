@@ -1,9 +1,16 @@
 import WriteJson
 
+def ScrapeAll(countrylist,websitelist):
+    for i in range(len(countrylist)):
+        for j in range(len(websitelist)):
+            scrape_country(countrylist[i],websitelist[j])
+    
+    return 1
+
 def scrape_country(country_name,website_name):
     if website_name == "worldometer":
         print("Getting data from Worldometer")
-        dailyD = 1
+        dailyD = 10
         cumulativeD = 1
         norm_dailyD = 1
         norm_comulativeD = 1
