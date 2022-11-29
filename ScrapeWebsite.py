@@ -5,8 +5,8 @@ import WriteJson
 def ScrapeAll(countrylist,websitelist):
     for i in range(len(countrylist)):
         for j in range(len(websitelist)):
-            scrape_country(countrylist[i],websitelist[j])
-
+            d1,d2,d3 = scrape_country(countrylist[i],websitelist[j])
+            WriteJson.data2json(websitelist[j],countrylist[i],d1,d2,d3)
     return 1
 
 def scrape_country(country_name,website_name):
@@ -15,18 +15,16 @@ def scrape_country(country_name,website_name):
         url = "https://www.worldometers.info/coronavirus/"
         data = scrape_countryWorld(country_name,url)
         datao = data[0]
-        WriteJson.data2json(website_name,country_name,string2num(datao[2]),string2num(datao[1]),string2num(datao[3]))
-        return 1
+        return string2num(datao[2]), string2num(datao[1]), string2num(datao[3])
     elif website_name == "nytimes":
         print("Getting data from NYTimes")
         dailyD = 1
         cumulativeD = 1
         norm_comulativeD = 1
-        WriteJson.data2json(website_name,country_name,dailyD,cumulativeD,norm_comulativeD)
-        return 1
+        return dailyD, cumulativeD, norm_comulativeD
     else:
         print("Unknow Website")
-        return 0
+        return 0,0,0
 
 def string2num(data):
     if len(data) == 0:
@@ -69,5 +67,5 @@ def scrape_countryWorld(Country,url):
             return country_wanted
             
 
-#Country = "France"
-#scrape_country(Country,"worldometer")
+Country = ["France"]
+ScrapeAll(Country,["worldometer"])
