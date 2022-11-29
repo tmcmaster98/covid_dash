@@ -2,8 +2,38 @@ import requests
 from bs4 import BeautifulSoup as soup
 import WriteJson
 
+def ScrapeAll(countrylist,websitelist):
+    for i in range(len(countrylist)):
+        for j in range(len(websitelist)):
+            scrape_country(countrylist[i],websitelist[j])
 
-def scrape_country(Country,url):
+    return 1
+
+def scrape_country(country_name,website_name):
+    if website_name == "worldometer":
+        print("Getting data from Worldometer")
+        url = "https://www.worldometers.info/coronavirus/"
+        data = scrape_countryWorld(country_name,url)
+        datao = data[0]
+        WriteJson.data2json(website_name,country_name,string2num(datao[2]),string2num(datao[1]),string2num(datao[3]))
+        return 1
+    elif website_name == "nytimes":
+        print("Getting data from NYTimes")
+        dailyD = 1
+        cumulativeD = 1
+        norm_comulativeD = 1
+        WriteJson.data2json(website_name,country_name,dailyD,cumulativeD,norm_comulativeD)
+        return 1
+    else:
+        print("Unknow Website")
+        return 0
+
+def string2num(data):
+    if len(data) == 0:
+        return 0
+    return int(data.replace(',',''))
+
+def scrape_countryWorld(Country,url):
     #requesting to access url
     url_req = requests.get(url, allow_redirects = True)
 
@@ -38,7 +68,6 @@ def scrape_country(Country,url):
             print(country_wanted)
             return country_wanted
             
-# Url we want to scrape
-url = "https://www.worldometers.info/coronavirus/"
-Country = "France"
-scrape_country(Country,url)
+
+#Country = "France"
+#scrape_country(Country,"worldometer")

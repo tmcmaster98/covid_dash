@@ -12,9 +12,6 @@ ScrapeWebsite.ScrapeAll(countries,websites)
 
 dataAll = WriteJson.readJson()
 
-number = WriteJson.getData(dataAll,'nytimes','USA','21/11/2022',"daily death")
-
-print(number)
 '''
 with urllib.request.urlopen("https://www.nytimes.com/interactive/2021/us/covid-cases.html") as fp:
     soup = BeautifulSoup.BeautifulSoup(fp,'html5lib')
