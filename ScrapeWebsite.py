@@ -66,6 +66,26 @@ def scrape_countryWorld(Country,url):
             print(country_wanted)
             return country_wanted
             
+def scrape_country_NYT(country):
+    filename = 'NYT_11_30_2022.html'
+    with open(filename) as fp:
+        soup = BeautifulSoup.BeautifulSoup(fp,'html5lib')
+
+    table = soup.find("table")
+    table_rows = table.find_all('tr')
+    data = []
+    for tr in table_rows:
+        td = tr.find_all('td')
+        row = [i.text.strip() for i in td]
+        data.append(row)
+    data.remove([])
+    for idx, coun in enumerate(data):
+        if('â€º' in coun[0]):
+            coun[0] = coun[0].split()[:-1]
+            coun[0] = " ".join(coun[0])
+        if(str(coun[0]) != str(country)):
+            return None
+    return coun[4]
 
 Country = ["France"]
 ScrapeAll(Country,["worldometer"])
