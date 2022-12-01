@@ -21,7 +21,7 @@ def scrape_country(country_name,website_name):
         dailyD = scrape_country_NYT(country_name,'NYT_11_30_2022_dd.html')
         cumulativeD = scrape_country_NYT(country_name,'NYT_11_30_2022_td.html')
         norm_comulativeD = 1
-        return dailyD, cumulativeD, norm_comulativeD
+        return string2num(dailyD), string2num(cumulativeD), norm_comulativeD
     else:
         print("Unknow Website")
         return 0,0,0
@@ -29,7 +29,7 @@ def scrape_country(country_name,website_name):
 def string2num(data):
     if len(data) == 0:
         return 0
-    return int(data.replace(',',''))
+    return float(data.replace(',',''))
 
 def scrape_countryWorld(Country,url):
     #requesting to access url
@@ -86,5 +86,5 @@ def scrape_country_NYT(country,filename):
             continue
         return coun[4]
 
-Country = ["France"]
-ScrapeAll(Country,["nytimes"])
+#Country = ["France"]
+#ScrapeAll(Country,["nytimes"])
