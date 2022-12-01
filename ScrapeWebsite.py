@@ -12,16 +12,21 @@ def ScrapeAll(countrylist,websitelist):
 def scrape_country(country_name,website_name):
     if website_name == "worldometer":
         #print("Getting data from Worldometer")
+        if country_name == 'United States':
+            country_name = 'USA'
+        if country_name == 'South Korea':
+            country_name = 'S. Korea'
+        if country_name == 'U.K.':
+            country_name = 'UK'
         url = "https://www.worldometers.info/coronavirus/"
         data = scrape_countryWorld(country_name,url)
         datao = data[0]
         return string2num(datao[2]), string2num(datao[1]), string2num(datao[3])
     elif website_name == "nytimes":
         #print("Getting data from NYTimes")
-        dailyD = scrape_country_NYT(country_name,'NYT_11_30_2022_dd.html')
-        cumulativeD = scrape_country_NYT(country_name,'NYT_11_30_2022_td.html')
-        norm_comulativeD = 1
-        return string2num(dailyD), string2num(cumulativeD), norm_comulativeD
+        dailyD = scrape_country_NYT(country_name,'NYT_11_30_2022_dd.html',1)
+        cumulativeD,norm_comulativeD = scrape_country_NYT(country_name,'NYT_11_30_2022_td.html',2)
+        return string2num(dailyD), string2num(cumulativeD), string2num(norm_comulativeD)*10
     else:
         print("Unknow Website")
         return 0,0,0
@@ -66,7 +71,7 @@ def scrape_countryWorld(Country,url):
             #print(country_wanted)
             return country_wanted
             
-def scrape_country_NYT(country,filename):
+def scrape_country_NYT(country,filename,type):
     with open(filename) as fp:
         soup1 = soup(fp,'html5lib') #soup = soup.BeautifulSoup(fp,'html5lib')
     table = soup1.find("table")
@@ -84,7 +89,10 @@ def scrape_country_NYT(country,filename):
         #print(coun[0])
         if(str(coun[0]) not in str(country)):
             continue
-        return coun[4]
+        if type == 2:
+            return coun[4], coun[5]
+        else:
+            return coun[4]
 
-#Country = ["France"]
-#ScrapeAll(Country,["nytimes"])
+Country = ["France"]
+ScrapeAll(Country,["nytimes"])
