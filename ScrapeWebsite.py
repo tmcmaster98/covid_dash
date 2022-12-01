@@ -11,15 +11,15 @@ def ScrapeAll(countrylist,websitelist):
 
 def scrape_country(country_name,website_name):
     if website_name == "worldometer":
-        print("Getting data from Worldometer")
+        #print("Getting data from Worldometer")
         url = "https://www.worldometers.info/coronavirus/"
         data = scrape_countryWorld(country_name,url)
         datao = data[0]
         return string2num(datao[2]), string2num(datao[1]), string2num(datao[3])
     elif website_name == "nytimes":
-        print("Getting data from NYTimes")
-        dailyD = 1
-        cumulativeD = 1
+        #print("Getting data from NYTimes")
+        dailyD = scrape_country_NYT(country_name,'NYT_11_30_2022_dd.html')
+        cumulativeD = scrape_country_NYT(country_name,'NYT_11_30_2022_td.html')
         norm_comulativeD = 1
         return dailyD, cumulativeD, norm_comulativeD
     else:
@@ -63,13 +63,13 @@ def scrape_countryWorld(Country,url):
         del country_info[4:14]
         if country_info[0] == Country:
             country_wanted.append(country_info)
-            print(country_wanted)
+            #print(country_wanted)
             return country_wanted
             
 def scrape_country_NYT(country,filename):
     with open(filename) as fp:
-        soup = soup.BeautifulSoup(fp,'html5lib')
-    table = soup.find("table")
+        soup1 = soup(fp,'html5lib') #soup = soup.BeautifulSoup(fp,'html5lib')
+    table = soup1.find("table")
     table_rows = table.find_all('tr')
     data = []
     for tr in table_rows:
@@ -87,4 +87,4 @@ def scrape_country_NYT(country,filename):
         return coun[4]
 
 Country = ["France"]
-ScrapeAll(Country,["worldometer"])
+ScrapeAll(Country,["nytimes"])
