@@ -2,7 +2,8 @@
     "Dates": [
         "30/11/2022",
         "01/12/2022",
-        "02/12/2022"
+        "02/12/2022",
+        "03/12/2022"
     ],
     "France": {
         "30/11/2022": {
@@ -39,6 +40,13 @@
                 "daily death": 67.0,
                 "cumulative death": 159093.0,
                 "normalized comulative death": 2426.0
+            }
+        },
+        "03/12/2022": {
+            "nytimes": {
+                "daily death": 64.0,
+                "cumulative death": 159915.0,
+                "normalized comulative death": 2380.0
             }
         }
     },
