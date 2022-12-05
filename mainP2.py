@@ -46,12 +46,14 @@ sourcedata1 = Wtd
 source1 = ColumnDataSource(data = sourcedata1)
 selectWebsite = Select(title="Website",value=websites[0],options=websites)
 selectoutput = Select(title = "Value of interest",value = "Total Deaths", options=["Total Deaths","Normalized Total Deaths"])
-p1 = figure(width = 800, height = 500,x_axis_type="datetime",title = 'Deaths Over time',y_axis_label = "Total Deaths",x_axis_label = "Time")
+p1 = figure(width = 1000, height = 500,x_axis_type="datetime",title = 'Deaths Over time',y_axis_label = "Total Deaths",x_axis_label = "Time")
+legend_it = []
 for z in range(0,len(countries)):
     line = countries[z]
-    p1.line('x',line,source=source1,legend_label = countries[z],color = colorslist[z])
-
-p1.add_layout(Legend(),'right')
+    c = p1.line('x',line,source=source1, color = colorslist[z],name = countries[z])
+    legend_it.append((countries[z],[c]))
+legend = Legend(items= legend_it)
+p1.add_layout(legend,'right')
 p1.legend.click_policy = "hide"
 websiteS = 0
 dataS = 0
