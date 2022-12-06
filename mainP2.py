@@ -60,7 +60,7 @@ p1.legend.click_policy = "hide"
 divnote1 = Div(text = "Click on legend name to hide/reappear that countries data.")
 divnote2 = Div(text = "With the choose date range you can't have it be a single day.")
 
-callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,selectoutput=selectoutput,yaxis= p1.yaxis[0],xrange = p1.x_range,date_range_slider1=date_range_slider1,Wtd=Wtd,Wntd=Wntd,Ntd=Ntd,Nntd=Nntd),code="""
+callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,selectoutput=selectoutput,yaxis= p1.yaxis[0],Wtd=Wtd,Wntd=Wntd,Ntd=Ntd,Nntd=Nntd),code="""
                 const outputW = selectoutput.value
                 const web = selectWebsite.value
 
@@ -84,9 +84,7 @@ callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,se
                         source.data = Nntd
                         yaxis.axis_label = "Normalized Total Deaths"
                     }
-                }
-                data_range_slider1.value[0] = date_range_slider1.start
-                data_range_slider1.value[1] = date_range_slider1.end         
+                }        
                         """)
 date_range_slider1.js_link('value',p1.x_range,'start',attr_selector=0)
 date_range_slider1.js_link('value',p1.x_range,'end',attr_selector=1)
