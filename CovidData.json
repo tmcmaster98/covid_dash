@@ -75,8 +75,8 @@
                 "normalized comulative death": 2428.0
             },
             "nytimes": {
-                "daily death": 62.7,
-                "cumulative death": 159990.0,
+                "daily death": 64.9,
+                "cumulative death": 160133.0,
                 "normalized comulative death": 2390.0
             }
         }
@@ -149,8 +149,8 @@
                 "normalized comulative death": 3306.0
             },
             "nytimes": {
-                "daily death": 261.6,
-                "cumulative death": 1088060.0,
+                "daily death": 250.0,
+                "cumulative death": 1088997.0,
                 "normalized comulative death": 3280.0
             }
         }
@@ -223,8 +223,8 @@
                 "normalized comulative death": 377.0
             },
             "nytimes": {
-                "daily death": 3.0,
-                "cumulative death": 530622.0,
+                "daily death": 2.3,
+                "cumulative death": 530630.0,
                 "normalized comulative death": 390.0
             }
         }
@@ -297,8 +297,8 @@
                 "normalized comulative death": 1886.0
             },
             "nytimes": {
-                "daily death": 118.4,
-                "cumulative death": 157943.0,
+                "daily death": 100.4,
+                "cumulative death": 158198.0,
                 "normalized comulative death": 1900.0
             }
         }
@@ -371,8 +371,8 @@
                 "normalized comulative death": 3205.0
             },
             "nytimes": {
-                "daily death": 56.1,
-                "cumulative death": 689665.0,
+                "daily death": 90.3,
+                "cumulative death": 690074.0,
                 "normalized comulative death": 3270.0
             }
         }
@@ -445,9 +445,9 @@
                 "normalized comulative death": 600.0
             },
             "nytimes": {
-                "daily death": 49.3,
-                "cumulative death": 30568.0,
-                "normalized comulative death": 590.0
+                "daily death": 50.9,
+                "cumulative death": 30769.0,
+                "normalized comulative death": 600.0
             }
         }
     },
@@ -519,9 +519,9 @@
                 "normalized comulative death": 3016.0
             },
             "nytimes": {
-                "daily death": 82.9,
-                "cumulative death": 181098.0,
-                "normalized comulative death": 3000.0
+                "daily death": 90.7,
+                "cumulative death": 181733.0,
+                "normalized comulative death": 3010.0
             }
         }
     },
@@ -593,9 +593,9 @@
                 "normalized comulative death": 2880.0
             },
             "nytimes": {
-                "daily death": 82.9,
-                "cumulative death": 196821.0,
-                "normalized comulative death": 2940.0
+                "daily death": 61.7,
+                "cumulative death": 197253.0,
+                "normalized comulative death": 2950.0
             }
         }
     },
@@ -667,9 +667,9 @@
                 "normalized comulative death": 402.0
             },
             "nytimes": {
-                "daily death": 143.1,
-                "cumulative death": 49834.0,
-                "normalized comulative death": 390.0
+                "daily death": 166.6,
+                "cumulative death": 50352.0,
+                "normalized comulative death": 400.0
             }
         }
     },
@@ -741,8 +741,8 @@
                 "normalized comulative death": 2690.0
             },
             "nytimes": {
-                "daily death": 53.6,
-                "cumulative death": 384103.0,
+                "daily death": 54.9,
+                "cumulative death": 384327.0,
                 "normalized comulative death": 2660.0
             }
         }

@@ -24,8 +24,8 @@ def scrape_country(country_name,website_name):
         return string2num(datao[2]), string2num(datao[1]), string2num(datao[3])
     elif website_name == "nytimes":
         #print("Getting data from NYTimes")
-        dailyD = scrape_country_NYT(country_name,'NYT_12_01_2022_dd.html',1)
-        cumulativeD,norm_comulativeD = scrape_country_NYT(country_name,'NYT_12_01_2022_td.html',2)
+        dailyD = scrape_country_NYT(country_name,'NYT_12_05_2022_dd.html',1)
+        cumulativeD,norm_comulativeD = scrape_country_NYT(country_name,'NYT_12_05_2022_td.html',2)
         return string2num(dailyD), string2num(cumulativeD), string2num(norm_comulativeD)*10
     else:
         print("Unknow Website")
