@@ -1,6 +1,10 @@
 {
     "Dates": [
-        "30/11/2022"
+        "30/11/2022",
+        "01/12/2022",
+        "02/12/2022",
+        "03/12/2022",
+        "04/12/2022"
     ],
     "France": {
         "30/11/2022": {
@@ -14,6 +18,54 @@
                 "cumulative death": 158950.0,
                 "normalized comulative death": 2424.0
             }
+        },
+        "01/12/2022": {
+            "nytimes": {
+                "daily death": 64.0,
+                "cumulative death": 159915.0,
+                "normalized comulative death": 2380.0
+            },
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 159026.0,
+                "normalized comulative death": 2425.0
+            }
+        },
+        "02/12/2022": {
+            "nytimes": {
+                "daily death": 64.0,
+                "cumulative death": 159915.0,
+                "normalized comulative death": 2380.0
+            },
+            "worldometer": {
+                "daily death": 67.0,
+                "cumulative death": 159093.0,
+                "normalized comulative death": 2426.0
+            }
+        },
+        "03/12/2022": {
+            "nytimes": {
+                "daily death": 62.7,
+                "cumulative death": 159990.0,
+                "normalized comulative death": 2390.0
+            },
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 159093.0,
+                "normalized comulative death": 2426.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 159093.0,
+                "normalized comulative death": 2426.0
+            },
+            "nytimes": {
+                "daily death": 62.7,
+                "cumulative death": 159990.0,
+                "normalized comulative death": 2390.0
+            }
         }
     },
     "United States": {
@@ -26,6 +78,54 @@
             "nytimes": {
                 "daily death": 285.5,
                 "cumulative death": 1087602.0,
+                "normalized comulative death": 3280.0
+            }
+        },
+        "01/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 1106378.0,
+                "normalized comulative death": 3305.0
+            },
+            "nytimes": {
+                "daily death": 285.5,
+                "cumulative death": 1087602.0,
+                "normalized comulative death": 3280.0
+            }
+        },
+        "02/12/2022": {
+            "worldometer": {
+                "daily death": 147.0,
+                "cumulative death": 1106572.0,
+                "normalized comulative death": 3305.0
+            },
+            "nytimes": {
+                "daily death": 285.5,
+                "cumulative death": 1087602.0,
+                "normalized comulative death": 3280.0
+            }
+        },
+        "03/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 1106607.0,
+                "normalized comulative death": 3305.0
+            },
+            "nytimes": {
+                "daily death": 261.6,
+                "cumulative death": 1088060.0,
+                "normalized comulative death": 3280.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 4.0,
+                "cumulative death": 1106860.0,
+                "normalized comulative death": 3306.0
+            },
+            "nytimes": {
+                "daily death": 261.6,
+                "cumulative death": 1088060.0,
                 "normalized comulative death": 3280.0
             }
         }
@@ -42,6 +142,54 @@
                 "cumulative death": 530620.0,
                 "normalized comulative death": 390.0
             }
+        },
+        "01/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 530624.0,
+                "normalized comulative death": 377.0
+            },
+            "nytimes": {
+                "daily death": 3.4,
+                "cumulative death": 530620.0,
+                "normalized comulative death": 390.0
+            }
+        },
+        "02/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 530624.0,
+                "normalized comulative death": 377.0
+            },
+            "nytimes": {
+                "daily death": 3.4,
+                "cumulative death": 530620.0,
+                "normalized comulative death": 390.0
+            }
+        },
+        "03/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 530627.0,
+                "normalized comulative death": 377.0
+            },
+            "nytimes": {
+                "daily death": 3.0,
+                "cumulative death": 530622.0,
+                "normalized comulative death": 390.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 530628.0,
+                "normalized comulative death": 377.0
+            },
+            "nytimes": {
+                "daily death": 3.0,
+                "cumulative death": 530622.0,
+                "normalized comulative death": 390.0
+            }
         }
     },
     "Germany": {
@@ -56,6 +204,54 @@
                 "cumulative death": 157791.0,
                 "normalized comulative death": 1900.0
             }
+        },
+        "01/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 158109.0,
+                "normalized comulative death": 1885.0
+            },
+            "nytimes": {
+                "daily death": 120.0,
+                "cumulative death": 157791.0,
+                "normalized comulative death": 1900.0
+            }
+        },
+        "02/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 158109.0,
+                "normalized comulative death": 1885.0
+            },
+            "nytimes": {
+                "daily death": 120.0,
+                "cumulative death": 157791.0,
+                "normalized comulative death": 1900.0
+            }
+        },
+        "03/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 158198.0,
+                "normalized comulative death": 1886.0
+            },
+            "nytimes": {
+                "daily death": 118.4,
+                "cumulative death": 157943.0,
+                "normalized comulative death": 1900.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 158198.0,
+                "normalized comulative death": 1886.0
+            },
+            "nytimes": {
+                "daily death": 118.4,
+                "cumulative death": 157943.0,
+                "normalized comulative death": 1900.0
+            }
         }
     },
     "Brazil": {
@@ -67,6 +263,54 @@
             },
             "nytimes": {
                 "daily death": 72.9,
+                "cumulative death": 689665.0,
+                "normalized comulative death": 3270.0
+            }
+        },
+        "01/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 689998.0,
+                "normalized comulative death": 3204.0
+            },
+            "nytimes": {
+                "daily death": 72.9,
+                "cumulative death": 689665.0,
+                "normalized comulative death": 3270.0
+            }
+        },
+        "02/12/2022": {
+            "worldometer": {
+                "daily death": 131.0,
+                "cumulative death": 690129.0,
+                "normalized comulative death": 3205.0
+            },
+            "nytimes": {
+                "daily death": 72.9,
+                "cumulative death": 689665.0,
+                "normalized comulative death": 3270.0
+            }
+        },
+        "03/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 690129.0,
+                "normalized comulative death": 3205.0
+            },
+            "nytimes": {
+                "daily death": 56.1,
+                "cumulative death": 689665.0,
+                "normalized comulative death": 3270.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 18.0,
+                "cumulative death": 690231.0,
+                "normalized comulative death": 3205.0
+            },
+            "nytimes": {
+                "daily death": 56.1,
                 "cumulative death": 689665.0,
                 "normalized comulative death": 3270.0
             }
@@ -84,6 +328,54 @@
                 "cumulative death": 30506.0,
                 "normalized comulative death": 590.0
             }
+        },
+        "01/12/2022": {
+            "worldometer": {
+                "daily death": 53.0,
+                "cumulative death": 30621.0,
+                "normalized comulative death": 597.0
+            },
+            "nytimes": {
+                "daily death": 48.9,
+                "cumulative death": 30506.0,
+                "normalized comulative death": 590.0
+            }
+        },
+        "02/12/2022": {
+            "worldometer": {
+                "daily death": 53.0,
+                "cumulative death": 30621.0,
+                "normalized comulative death": 597.0
+            },
+            "nytimes": {
+                "daily death": 48.9,
+                "cumulative death": 30506.0,
+                "normalized comulative death": 590.0
+            }
+        },
+        "03/12/2022": {
+            "worldometer": {
+                "daily death": 48.0,
+                "cumulative death": 30669.0,
+                "normalized comulative death": 597.0
+            },
+            "nytimes": {
+                "daily death": 49.3,
+                "cumulative death": 30568.0,
+                "normalized comulative death": 590.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 60.0,
+                "cumulative death": 30729.0,
+                "normalized comulative death": 599.0
+            },
+            "nytimes": {
+                "daily death": 49.3,
+                "cumulative death": 30568.0,
+                "normalized comulative death": 590.0
+            }
         }
     },
     "Italy": {
@@ -92,6 +384,54 @@
                 "daily death": 0,
                 "cumulative death": 181098.0,
                 "normalized comulative death": 3005.0
+            },
+            "nytimes": {
+                "daily death": 82.9,
+                "cumulative death": 181098.0,
+                "normalized comulative death": 3000.0
+            }
+        },
+        "01/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 181098.0,
+                "normalized comulative death": 3005.0
+            },
+            "nytimes": {
+                "daily death": 82.9,
+                "cumulative death": 181098.0,
+                "normalized comulative death": 3000.0
+            }
+        },
+        "02/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 181733.0,
+                "normalized comulative death": 3016.0
+            },
+            "nytimes": {
+                "daily death": 82.9,
+                "cumulative death": 181098.0,
+                "normalized comulative death": 3000.0
+            }
+        },
+        "03/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 181733.0,
+                "normalized comulative death": 3016.0
+            },
+            "nytimes": {
+                "daily death": 82.9,
+                "cumulative death": 181098.0,
+                "normalized comulative death": 3000.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 181733.0,
+                "normalized comulative death": 3016.0
             },
             "nytimes": {
                 "daily death": 82.9,
@@ -112,6 +452,54 @@
                 "cumulative death": 196821.0,
                 "normalized comulative death": 2940.0
             }
+        },
+        "01/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 196821.0,
+                "normalized comulative death": 2873.0
+            },
+            "nytimes": {
+                "daily death": 82.9,
+                "cumulative death": 196821.0,
+                "normalized comulative death": 2940.0
+            }
+        },
+        "02/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 196821.0,
+                "normalized comulative death": 2873.0
+            },
+            "nytimes": {
+                "daily death": 82.9,
+                "cumulative death": 196821.0,
+                "normalized comulative death": 2940.0
+            }
+        },
+        "03/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 197253.0,
+                "normalized comulative death": 2880.0
+            },
+            "nytimes": {
+                "daily death": 82.9,
+                "cumulative death": 196821.0,
+                "normalized comulative death": 2940.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 197253.0,
+                "normalized comulative death": 2880.0
+            },
+            "nytimes": {
+                "daily death": 82.9,
+                "cumulative death": 196821.0,
+                "normalized comulative death": 2940.0
+            }
         }
     },
     "Japan": {
@@ -126,6 +514,54 @@
                 "cumulative death": 49652.0,
                 "normalized comulative death": 390.0
             }
+        },
+        "01/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 49826.0,
+                "normalized comulative death": 397.0
+            },
+            "nytimes": {
+                "daily death": 136.0,
+                "cumulative death": 49652.0,
+                "normalized comulative death": 390.0
+            }
+        },
+        "02/12/2022": {
+            "worldometer": {
+                "daily death": 187.0,
+                "cumulative death": 50013.0,
+                "normalized comulative death": 398.0
+            },
+            "nytimes": {
+                "daily death": 136.0,
+                "cumulative death": 49652.0,
+                "normalized comulative death": 390.0
+            }
+        },
+        "03/12/2022": {
+            "worldometer": {
+                "daily death": 180.0,
+                "cumulative death": 50193.0,
+                "normalized comulative death": 400.0
+            },
+            "nytimes": {
+                "daily death": 143.1,
+                "cumulative death": 49834.0,
+                "normalized comulative death": 390.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 151.0,
+                "cumulative death": 50344.0,
+                "normalized comulative death": 401.0
+            },
+            "nytimes": {
+                "daily death": 143.1,
+                "cumulative death": 49834.0,
+                "normalized comulative death": 390.0
+            }
         }
     },
     "Russia": {
@@ -138,6 +574,54 @@
             "nytimes": {
                 "daily death": 52.6,
                 "cumulative death": 384044.0,
+                "normalized comulative death": 2660.0
+            }
+        },
+        "01/12/2022": {
+            "worldometer": {
+                "daily death": 0,
+                "cumulative death": 392060.0,
+                "normalized comulative death": 2689.0
+            },
+            "nytimes": {
+                "daily death": 52.6,
+                "cumulative death": 384044.0,
+                "normalized comulative death": 2660.0
+            }
+        },
+        "02/12/2022": {
+            "worldometer": {
+                "daily death": 57.0,
+                "cumulative death": 392117.0,
+                "normalized comulative death": 2689.0
+            },
+            "nytimes": {
+                "daily death": 52.6,
+                "cumulative death": 384044.0,
+                "normalized comulative death": 2660.0
+            }
+        },
+        "03/12/2022": {
+            "worldometer": {
+                "daily death": 59.0,
+                "cumulative death": 392176.0,
+                "normalized comulative death": 2690.0
+            },
+            "nytimes": {
+                "daily death": 53.6,
+                "cumulative death": 384103.0,
+                "normalized comulative death": 2660.0
+            }
+        },
+        "04/12/2022": {
+            "worldometer": {
+                "daily death": 55.0,
+                "cumulative death": 392231.0,
+                "normalized comulative death": 2690.0
+            },
+            "nytimes": {
+                "daily death": 53.6,
+                "cumulative death": 384103.0,
                 "normalized comulative death": 2660.0
             }
         }
