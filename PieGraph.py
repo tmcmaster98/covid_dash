@@ -117,7 +117,7 @@ for j,val1 in enumerate(WtdDayDict):
     for count,val in enumerate(countries):
         #  print(val)
          #inserts the country with value of each value of the section
-         WtdDayDict[val1][val] = sections[j][count]
+         WtdDayDict[val1][val] = WriteJson.getData(dataAll,websites[0],val,dates_str[j],"cumulative death")
         #  print(WtdDayDict[i])
 #Wntd
 for j,val1 in enumerate(WtdDayDict):
@@ -137,7 +137,7 @@ for j,val1 in enumerate(WtdDayDict):
     for count,val in enumerate(countries):
         #  print(val)
          #inserts the country with value of each value of the section
-         NtdDayDict[val1][val] = sections[j][count]
+         NtdDayDict[val1][val] = WriteJson.getData(dataAll,websites[1],val,dates_str[j],"cumulative death")
         #  print(NtdDayDict[i])
 #Nntd
 for j,val1 in enumerate(WtdDayDict):
@@ -156,21 +156,23 @@ for j,val1 in enumerate(WtdDayDict):
 # print("Ntd",NtdDayDict)
 # print("Nntd",NntdDayDict)
 
+data1 = pd.Series(WtdDayDict['Day0']).reset_index(name='value').rename(columns={'index': 'country'})
+data1['angle'] = data1['value']/data1['value'].sum() * 2*pi
+data1['color'] = Category20c[len(WtdDayDict['Day0'])]
 
-data = pd.Series(WtdDayDict['Day0']).reset_index(name='value').rename(columns={'index': 'country'})
-data['angle'] = data['value']/data['value'].sum() * 2*pi
-data['color'] = Category20c[len(WtdDayDict['Day0'])]
 
 pie = figure(height=350, title="Pie Chart", toolbar_location=None,
            tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
 
+source2 = data1
 pie.wedge(x=0, y=1, radius=0.4,
         start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
-        line_color="white", fill_color='color', legend_field='country', source=data)
+        line_color="white", fill_color='color', legend_field='country', source=source2)
 
 pie.axis.axis_label = None
 pie.axis.visible = False
 pie.grid.grid_line_color = None
+
 
 show(pie)
 
