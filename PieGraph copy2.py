@@ -54,6 +54,7 @@ def getdataPercent(data,countrylist,website,dates,datatype,colors):
         inner['end'] = end_angle
         inner['color'] = colors
         inner['names'] = countrylist
+        inner['value'] = percentages
         output[day] = inner
     return output
 # This will be the main function to run everything.
@@ -83,7 +84,7 @@ for i in Wtd['United States']:
 print(count)
 
 pie = figure(height=350, title="Pie Chart", toolbar_location=None,
-           tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
+           tools="hover", tooltips="@names: @value", x_range=(-0.5, 1.0))
 source2 = ColumnDataSource(data = WtdP[dates_str[0]])
 
 # print("source2",source2)
