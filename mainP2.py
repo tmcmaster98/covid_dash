@@ -35,7 +35,6 @@ def getdataPercent(data,countrylist,website,dates,datatype,colors):
         for j,country in enumerate(countrylist):
             outputline[j] = WriteJson.getData(data,website,country,day,datatype)
             total = total + outputline[j]
-        print(total)
         for x1,x in enumerate(outputline):
             percentages[x1] = (x/total)*100
         radians = [math.radians((percent/100)*360) for percent in percentages]
@@ -159,8 +158,7 @@ pie = figure(height=350, title="Pie Chart", toolbar_location=None,
            tools="hover", tooltips="@names: @value", x_range=(-0.5, 1.0))
 source2 = ColumnDataSource(data = WtdP[dates_str[0]])
 
-# print("source2",source2)
-print("WtdP",WtdP)
+
 pie.wedge(x=0, y=1, radius=0.4, source = source2, start_angle= 'start' , end_angle= 'end', fill_color= 'color', legend_field= 'names')
 
 pie.axis.axis_label = None
