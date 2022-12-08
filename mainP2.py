@@ -2,7 +2,7 @@ import ScrapeWebsite
 import WriteJson
 from datetime import datetime
 from bokeh.layouts import layout, column, row
-from bokeh.models import Div, CustomJS, Select, DateRangeSlider, ColumnDataSource, Legend, Range1d, FactorRange
+from bokeh.models import Div, CustomJS, Select, DateRangeSlider, ColumnDataSource, Legend, Range1d, FactorRange, SetValue
 from bokeh.plotting import figure, show
 
 # Functions used below
@@ -60,7 +60,28 @@ p1.legend.click_policy = "hide"
 divnote1 = Div(text = "Click on legend name to hide/reappear that countries data.")
 divnote2 = Div(text = "With the choose date range you can't have it be a single day.")
 
-callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,selectoutput=selectoutput,yaxis= p1.yaxis[0],Wtd=Wtd,Wntd=Wntd,Ntd=Ntd,Nntd=Nntd),code="""
+# define array of tuples. This contains every x position where there is a data point
+x = [(country, date) for country in countries for date in dates_str]
+
+# initialize vector to store daily death numbers
+counts = []
+
+# loop through each country, extracting data for the bar graph
+for country in countries:
+    bar = source1.data[country]
+    counts = counts + bar
+
+src = ColumnDataSource(data=dict(x=x,counts=counts,color=colorslist*len(dates)))
+p2 = figure(x_range=FactorRange(*x), height=700, width=1500, title="Death Counts by Day")
+p2.vbar(x='x', top='counts', width=0.9, source=src, line_color= "white",color='color')
+
+p2.y_range.start = 0
+p2.x_range.range_padding = 0.2
+p2.xaxis.major_label_orientation = 1
+p2.xgrid.grid_line_color = None
+
+
+callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,selectoutput=selectoutput,yaxis= p1.yaxis[0],Wtd=Wtd,Wntd=Wntd,Ntd=Ntd,Nntd=Nntd,bar=bar,counts=counts),code="""
                 const outputW = selectoutput.value
                 const web = selectWebsite.value
 
@@ -71,8 +92,7 @@ callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,se
                     }
                     else{
                         source.data = Wntd
-                        yaxis.axis_label = "Normalized Total Deaths"
-                        
+                        yaxis.axis_label = "Normalized Total Deaths"  
                     }    
                 }
                 else{
@@ -84,38 +104,16 @@ callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,se
                         source.data = Nntd
                         yaxis.axis_label = "Normalized Total Deaths"
                     }
-                }        
+                }      
                         """)
+
+
 date_range_slider1.js_link('value',p1.x_range,'start',attr_selector=0)
 date_range_slider1.js_link('value',p1.x_range,'end',attr_selector=1)
 selectWebsite.js_on_change('value',callbackData)
 selectoutput.js_on_change('value',callbackData)
 layoutfigure1 = row(p1,column(selectoutput,selectWebsite,date_range_slider1,divnote1,divnote2))
-## This is where the rest of the code goes
 
-# define array of tuples. This contains every x position where there is a data
-x = [(country, date) for country in countries for date in dates_str]
-
-# initialize vector to store daily death numbers
-counts = []
-
-# loop through each country, extracting data for the bar graph
-for country in countries:
-    bar = sourcedata1[country]
-    counts = counts + bar
-
-src = ColumnDataSource(data=dict(x=x,counts=counts,color=colorslist*len(dates)))
-
-p2 = figure(x_range=FactorRange(*x), height=700, width=1500, title="Death Counts by Day", toolbar_location=None, tools="")
-p2.vbar(x='x', top='counts', width=0.9, source=src, line_color= "white",color='color')
-
-p2.y_range.start = 0
-p2.x_range.range_padding = 0.2
-p2.xaxis.major_label_orientation = 1
-p2.xgrid.grid_line_color = None
-
-layoutfigure2 = row(p2)
-
-output = layout([[divtop],[divtop2],[breakline],[layoutfigure1],[layoutfigure2],[breakline]])
+output = layout([[divtop],[divtop2],[breakline],[layoutfigure1],[p2],[breakline]])
 
 show(output)
