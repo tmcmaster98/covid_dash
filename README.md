@@ -17,3 +17,8 @@ Note:
 NYT Website was having trouble and a download of the HTML file was needed to collect the data.
 
 The short report can be found in the word document called "Data_scraping_short_report"
+
+For Part 2:
+Run mainP2.py to get run the code that creates the html website.
+The file is called mainP2.html
+
