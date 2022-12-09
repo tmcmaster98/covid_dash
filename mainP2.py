@@ -2,7 +2,7 @@ import ScrapeWebsite
 import WriteJson
 from datetime import datetime
 from bokeh.layouts import layout, column, row
-from bokeh.models import Div, CustomJS, Select, DateRangeSlider, ColumnDataSource, Legend, Range1d, FactorRange, Slider,SetValue
+from bokeh.models import Div, CustomJS, Select, DateRangeSlider, ColumnDataSource, Legend, Range1d, FactorRange, Slider,SetValue,RangeSlider
 from bokeh.plotting import figure, show
 import math
 from bokeh.palettes import Category20c
@@ -19,16 +19,19 @@ def str2date(dates):
 def getdatalist(data,countrylist,website,dates,datetype,dates2):
     #function creates a dictionary where the keys are the countries and a variable x, within each key it holds the dates, total deaths,
     #and normalized death rates
-    
+    max = 0
     output = dict()
     outputline = [0]*len(dates)
     for i in range(0,len(countrylist)):
         for j in range(0,len(dates)):
             outputline[j] = WriteJson.getData(data,website,countrylist[i],dates[j],datetype)
+            if outputline[j] > max:
+                max = outputline[j]
         output[countrylist[i]] = outputline
         outputline = [0]*len(dates)
     output['x'] = dates2
-    return output
+    max = max*1.05
+    return output,max
 
 def getdataPercent(data,countrylist,website,dates,datatype,colors):
     
@@ -74,10 +77,12 @@ websites = ["worldometer","nytimes"]
 dataAll = WriteJson.readJson()
 dates_str = dataAll["Dates"]
 dates = str2date(dates_str)
-Wtd = getdatalist(dataAll,countries,websites[0],dates_str,"cumulative death",dates)
-Wntd = getdatalist(dataAll,countries,websites[0],dates_str,"normalized comulative death",dates)
-Ntd = getdatalist(dataAll,countries,websites[-1],dates_str,"cumulative death",dates)
-Nntd = getdatalist(dataAll,countries,websites[-1],dates_str,"normalized comulative death",dates)
+Wtd,maxWtd = getdatalist(dataAll,countries,websites[0],dates_str,"cumulative death",dates)
+Wntd,maxWntd = getdatalist(dataAll,countries,websites[0],dates_str,"normalized comulative death",dates)
+Ntd,maxNtd = getdatalist(dataAll,countries,websites[-1],dates_str,"cumulative death",dates)
+Nntd,maxNntd = getdatalist(dataAll,countries,websites[-1],dates_str,"normalized comulative death",dates)
+Wdd,maxWdd = getdatalist(dataAll,countries,websites[0],dates_str,"daily death",dates)
+Ndd,maxNdd = getdatalist(dataAll,countries,websites[-1],dates_str,"daily death",dates)
 
 divtop = Div(text="<b>Welcome to your Covid Dashboard </b>")
 divtop2 = Div(text="Created by Thomas Mcmaster, Jason Hernandez and Zachary Hunzeker")
@@ -87,13 +92,14 @@ source1 = ColumnDataSource(data = sourcedata1)
 
 #drop down buttons to select the website and type of data wanted to be displayed
 selectWebsite = Select(title="Website",value=websites[0],options=websites)
-selectoutput = Select(title = "Value of interest",value = "Total Deaths", options=["Total Deaths","Normalized Total Deaths"])
+selectoutput = Select(title = "Value of interest",value = "Total Deaths", options=["Deaths Per Day","Total Deaths","Normalized Total Deaths"])
+yaxis_slider = RangeSlider(start = 0, end = 1,value=(0,1),step = .01,title='Zoom Percent in y direction')
 #data range slider used to select the dates wanted to be displayed 
 date_range_slider1 = DateRangeSlider(title= "Choose date range",value = (dates[0],dates[-1]),start = dates[0] ,end = dates[-1])
-
 #start of line graph 
 p1 = figure(width = 1000, height = 500,x_axis_type="datetime",title = 'Deaths Over time',y_axis_label = "Total Deaths",x_axis_label = "Time")
 p1.x_range = Range1d(date_range_slider1.value[0],date_range_slider1.value[1])
+p1.y_range = Range1d(start = 0,end = maxWtd)
 legend_it = []
 for z in range(0,len(countries)):
     line = countries[z]
@@ -105,29 +111,51 @@ p1.legend.click_policy = "hide"
 divnote1 = Div(text = "Click on legend name to hide/reappear that countries data.")
 divnote2 = Div(text = "With the choose date range you can't have it be a single day.")
 
-callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,selectoutput=selectoutput,yaxis= p1.yaxis[0],Wtd=Wtd,Wntd=Wntd,Ntd=Ntd,Nntd=Nntd),code="""
-                const outputW = selectoutput.value
+callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,selectoutput=selectoutput,yaxis_slider=yaxis_slider,yaxis= p1.yaxis[0],y_range = p1.y_range,Wtd=Wtd,Wntd=Wntd,Wdd=Wdd,Ntd=Ntd,Nntd=Nntd,Ndd=Ndd,maxWtd=maxWtd,maxWntd=maxWntd,maxWdd=maxWdd,maxNtd=maxNtd,maxNntd=maxNntd,maxNdd=maxNdd),code="""                const outputW = selectoutput.value
                 const web = selectWebsite.value
+                const output = selectoutput.value
+                const valueMin = yaxis_slider.value[0]
+                const valueMax = yaxis_slider.value[1]
                 if (web == "worldometer"){
-                    if (outputW == "Total Deaths"){
+                    if (output == "Total Deaths"){
                         source.data = Wtd
                         yaxis.axis_label = "Total Deaths"
+                        y_range.end = maxWtd*valueMax
+                        y_range.start = maxWtd*valueMin
+                    }
+                    else if (output == "Deaths Per Day"){
+                        source.data = Wdd
+                        yaxis.axis_label = "Daily Deaths"  
+                        y_range.end = maxWdd*valueMax
+                        y_range.start = maxWdd*valueMin
                     }
                     else{
                         source.data = Wntd
                         yaxis.axis_label = "Normalized Total Deaths"  
+                        y_range.end = maxWntd*valueMax
+                        y_range.start = maxWntd*valueMin
                     }    
                 }
                 else{
-                    if (outputW == "Total Deaths"){
+                    if (output == "Total Deaths"){
                         source.data = Ntd
                         yaxis.axis_label = "Total Deaths"
+                        y_range.end = maxNtd*valueMax
+                        y_range.start = maxNtd*valueMin
+                    }
+                    else if (output == "Deaths Per Day"){
+                        source.data = Ndd
+                        yaxis.axis_label = "Average Daily Deaths"  
+                        y_range.end = maxNdd*valueMax
+                        y_range.start = maxNdd*valueMin
                     }
                     else{
                         source.data = Nntd
                         yaxis.axis_label = "Normalized Total Deaths"
+                        y_range.end = maxNntd*valueMax
+                        y_range.start = maxNntd*valueMin
                     }
-                }      
+                }     
                         """)
 
 
@@ -135,7 +163,8 @@ date_range_slider1.js_link('value',p1.x_range,'start',attr_selector=0)
 date_range_slider1.js_link('value',p1.x_range,'end',attr_selector=1)
 selectWebsite.js_on_change('value',callbackData)
 selectoutput.js_on_change('value',callbackData)
-layoutfigure1 = row(p1,column(selectoutput,selectWebsite,date_range_slider1,divnote1,divnote2))
+yaxis_slider.js_on_change('value',callbackData)
+layoutfigure1 = row(p1,column(selectoutput,selectWebsite,date_range_slider1,yaxis_slider,divnote1,divnote2))
 ## Start of bar graph
 
 # define array of tuples. This contains every x position where there is a data point
