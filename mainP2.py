@@ -8,6 +8,8 @@ import math
 from bokeh.palettes import Category20c
 # Functions used below
 def str2date(dates):
+    #function creates a list of the dates from the json file 
+    
     output = [0]*len(dates)
     for i in range(len(dates)):
         brokenlist = dates[i].split('/')
@@ -15,6 +17,9 @@ def str2date(dates):
     return output
 
 def getdatalist(data,countrylist,website,dates,datetype,dates2):
+    #function creates a dictionary where the keys are the countries and a variable x, within each key it holds the dates, total deaths,
+    #and normalized death rates
+    
     output = dict()
     outputline = [0]*len(dates)
     for i in range(0,len(countrylist)):
@@ -26,17 +31,23 @@ def getdatalist(data,countrylist,website,dates,datetype,dates2):
     return output
 
 def getdataPercent(data,countrylist,website,dates,datatype,colors):
+    
     output = dict()
+    #function creates two different dictionaries that are used for the pie graph
+    #the keys vary from country names, to the dates, and colors needed to produce the pie graph
+    
     for j,day in enumerate(dates):
         total = 0
         outputline = [0]*len(countrylist)
         percentages = [0]*len(countrylist)
+        pieValues = [0]*len(countrylist)
         inner = dict()
         for j,country in enumerate(countrylist):
             outputline[j] = WriteJson.getData(data,website,country,day,datatype)
             total = total + outputline[j]
         for x1,x in enumerate(outputline):
             percentages[x1] = (x/total)*100
+            pieValues[x1] = x
         radians = [math.radians((percent/100)*360) for percent in percentages]
         start_angle = [math.radians(0)]
         prev = start_angle[0]
@@ -48,7 +59,7 @@ def getdataPercent(data,countrylist,website,dates,datatype,colors):
         inner['end'] = end_angle
         inner['color'] = colors
         inner['names'] = countrylist
-        inner['value'] = percentages
+        inner['value'] = pieValues
         output[day] = inner
     return output
 
@@ -73,9 +84,14 @@ divtop2 = Div(text="Created by Thomas Mcmaster, Jason Hernandez and Zachary Hunz
 breakline = Div(text = "_________________________________________________________________________________________________________________________________________________________________________________________________________________________",height = 50)
 sourcedata1 = Wtd
 source1 = ColumnDataSource(data = sourcedata1)
+
+#drop down buttons to select the website and type of data wanted to be displayed
 selectWebsite = Select(title="Website",value=websites[0],options=websites)
 selectoutput = Select(title = "Value of interest",value = "Total Deaths", options=["Total Deaths","Normalized Total Deaths"])
+#data range slider used to select the dates wanted to be displayed 
 date_range_slider1 = DateRangeSlider(title= "Choose date range",value = (dates[0],dates[-1]),start = dates[0] ,end = dates[-1])
+
+#start of line graph 
 p1 = figure(width = 1000, height = 500,x_axis_type="datetime",title = 'Deaths Over time',y_axis_label = "Total Deaths",x_axis_label = "Time")
 p1.x_range = Range1d(date_range_slider1.value[0],date_range_slider1.value[1])
 legend_it = []
@@ -92,7 +108,6 @@ divnote2 = Div(text = "With the choose date range you can't have it be a single 
 callbackData = CustomJS(args=dict(source=source1, selectWebsite=selectWebsite,selectoutput=selectoutput,yaxis= p1.yaxis[0],Wtd=Wtd,Wntd=Wntd,Ntd=Ntd,Nntd=Nntd),code="""
                 const outputW = selectoutput.value
                 const web = selectWebsite.value
-
                 if (web == "worldometer"){
                     if (outputW == "Total Deaths"){
                         source.data = Wtd
@@ -148,24 +163,30 @@ WtdP = getdataPercent(dataAll,countries,websites[0],dates_str,"cumulative death"
 WntdP = getdataPercent(dataAll,countries,websites[0],dates_str,"normalized comulative death",colorslist)
 NtdP = getdataPercent(dataAll,countries,websites[-1],dates_str,"cumulative death",colorslist)
 NntdP = getdataPercent(dataAll,countries,websites[-1],dates_str,"normalized comulative death",colorslist)
+
+#A for loop to count the amount date entries in the json file that will be used later
 count= 0
 keyValues = []
 for i in Wtd['United States']:
     count += 1
-print(count)
+# print(count)
 
+#This creates the pie graph figure
 pie = figure(height=350, title="Pie Chart", toolbar_location=None,
            tools="hover", tooltips="@names: @value", x_range=(-0.5, 1.0))
 source2 = ColumnDataSource(data = WtdP[dates_str[0]])
 
-
+#creates the each wedge of the pie graph 
 pie.wedge(x=0, y=1, radius=0.4, source = source2, start_angle= 'start' , end_angle= 'end', fill_color= 'color', legend_field= 'names')
 
 pie.axis.axis_label = None
 pie.axis.visible = False
 pie.grid.grid_line_color = None
 
+#slider that is used to select which day of data wants to be displayed
 slider = Slider(start = 0, end = count - 1, value = 0, step = 1, title = "Day")
+
+#drop down bars that are used to select from which website and what type of data wants to be displayed
 selectWebsite2 = Select(title="Website",value=websites[0],options=websites)
 selectoutput2 = Select(title = "Value of interest",value = "Total Deaths", options=["Total Deaths","Normalized Total Deaths"])
 
@@ -198,5 +219,6 @@ selectoutput2.js_on_change('value',callbackData2)
 layoutfigure2 = row(pie,column(selectoutput2,selectWebsite2,slider))
 
 
+#this outputs all three figures onto a single html page
 output = layout([[divtop],[divtop2],[breakline],[layoutfigure1],[breakline],[p2],[breakline],[layoutfigure2],[breakline]])
 show(output)
