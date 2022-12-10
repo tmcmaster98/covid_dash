@@ -7,6 +7,7 @@ The main data that is used is contained in CovidData.json
 Run main.py to collect the data.
 
 Important modules and things to download to get it to run: 
+
 -WriteJson.py
 
 -ScrapeWebsite.py
