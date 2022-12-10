@@ -171,14 +171,40 @@ layoutfigure1 = row(p1,column(selectoutput,selectWebsite,date_range_slider1,yaxi
 x = [(country, date) for country in countries for date in dates_str]
 
 # initialize vector to store daily death numbers
-counts = []
+counts1 = []
+counts2 = []
+counts3 = []
+counts4 = []
 
 # loop through each country, extracting data for the bar graph
 for country in countries:
-    bar = source1.data[country]
-    counts = counts + bar
+    bar1 = Wtd[country]
+    bar2 = Wntd[country]
+    bar3 = Ntd[country]
+    bar4 = Nntd[country]
+    counts1 = counts1 + bar1
+    counts2 = counts2 + bar2
+    counts3 = counts3 + bar3
+    counts4 = counts4 + bar4
 
-src = ColumnDataSource(data=dict(x=x,counts=counts,color=colorslist*len(dates)))
+wtd_bar = dict()
+wntd_bar = dict()
+ntd_bar = dict()
+nntd_bar = dict()
+wtd_bar['counts'] = counts1
+wntd_bar['counts'] = counts2
+ntd_bar['counts'] = counts3
+nntd_bar['counts'] = counts4
+wtd_bar['x'] = x
+wntd_bar['x'] = x
+ntd_bar['x'] = x
+nntd_bar['x'] = x
+wtd_bar['color'] = colorslist*len(dates)
+wntd_bar['color'] = colorslist*len(dates)
+ntd_bar['color'] = colorslist*len(dates)
+nntd_bar['color'] = colorslist*len(dates)
+
+src = ColumnDataSource(data=wtd_bar)
 p2 = figure(x_range=FactorRange(*x), height=700, width=1500, title="Death Counts by Day")
 p2.vbar(x='x', top='counts', width=0.9, source=src, line_color= "white",color='color')
 
@@ -186,6 +212,38 @@ p2.y_range.start = 0
 p2.x_range.range_padding = 0.2
 p2.xaxis.major_label_orientation = 1
 p2.xgrid.grid_line_color = None
+
+selectWebsite3 = Select(title="Website",value=websites[0],options=websites)
+selectoutput3 = Select(title = "Value of interest",value = "Total Deaths", options=["Total Deaths","Normalized Total Deaths"])
+
+
+callbackData3 = CustomJS(args=dict(source=src, selectWebsite=selectWebsite3,selectoutput=selectoutput3,Wtd=wtd_bar,Wntd=wntd_bar,Ntd=ntd_bar,Nntd=nntd_bar),code="""
+                const outputW = selectoutput.value
+                const web = selectWebsite.value
+                if (web == "worldometer"){              
+                    if (outputW == "Total Deaths"){
+                            source.data = Wtd
+                              
+                    }
+                    else{
+                        source.data = Wntd
+                        
+                    }    
+                }
+                else{
+                    if (outputW == "Total Deaths"){
+                        source.data = Ntd
+                    }
+                    else{
+                        source.data = Nntd
+                    }
+                }        
+                      """  )
+
+selectWebsite3.js_on_change('value',callbackData3)
+selectoutput3.js_on_change('value',callbackData3)
+
+layoutfigure3 = column(p2,row(selectWebsite3,selectoutput3))
 
 ### Pie Graph Code
 WtdP = getdataPercent(dataAll,countries,websites[0],dates_str,"cumulative death",colorslist)
@@ -249,5 +307,5 @@ layoutfigure2 = row(pie,column(selectoutput2,selectWebsite2,slider))
 
 
 #this outputs all three figures onto a single html page
-output = layout([[divtop],[divtop2],[breakline],[layoutfigure1],[breakline],[p2],[breakline],[layoutfigure2],[breakline]])
+output = layout([[divtop],[divtop2],[breakline],[layoutfigure1],[breakline],[layoutfigure3],[breakline],[layoutfigure2],[breakline]])
 show(output)
