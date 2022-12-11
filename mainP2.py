@@ -205,7 +205,7 @@ ntd_bar['color'] = colorslist*len(dates)
 nntd_bar['color'] = colorslist*len(dates)
 
 src = ColumnDataSource(data=wtd_bar)
-p2 = figure(x_range=FactorRange(*x), height=700, width=1500, title="Death Counts by Day")
+p2 = figure(x_range=FactorRange(*x), height=700, width=1500, title="Death Counts")
 p2.vbar(x='x', top='counts', width=0.9, source=src, line_color= "white",color='color')
 
 p2.y_range.start = 0
