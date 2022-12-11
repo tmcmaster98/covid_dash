@@ -8,6 +8,10 @@ Run main.py to collect the data.
 
 Important modules and things to download to get it to run: 
 
+-WriteJson.py
+
+-ScrapeWebsite.py
+
 -bokeh
 
 -bs4
